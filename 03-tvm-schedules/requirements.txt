@@ -1,0 +1,3 @@
+numpy
+# TVM: depending on platform/wheel availability
+# apache-tvm

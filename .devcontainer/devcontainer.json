@@ -1,0 +1,33 @@
+{
+    "name": "compiler-lab",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "..",
+      "args": { "FLAVOR": "base" }
+    },
+    "runArgs": [
+      "--cap-add=SYS_PTRACE",
+      "--security-opt=seccomp=unconfined"
+    ],
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-vscode.cpptools",
+          "ms-vscode.cmake-tools",
+          "llvm-vs-code-extensions.vscode-clangd",
+          "ms-python.python"
+        ],
+        "settings": {
+          "cmake.generator": "Ninja",
+          "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+          "editor.formatOnSave": true
+        }
+      }
+    },
+    "postCreateCommand": "llvm-config --version || true",
+    "remoteEnv": {
+      "CC": "clang",
+      "CXX": "clang++"
+    }
+  }
+  

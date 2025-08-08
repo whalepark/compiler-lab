@@ -1,0 +1,22 @@
+name: build
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-llvm-example:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: |
+          apt-get update && apt-get install -y \
+            clang llvm-dev cmake ninja-build build-essential
+      - name: Build 01-llvm-kaleidoscope
+        run: |
+          cd 01-llvm-kaleidoscope
+          mkdir -p build && cd build
+          cmake -G Ninja -DLLVM_DIR=$(llvm-config --cmakedir) ..
+          ninja
