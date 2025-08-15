@@ -10,13 +10,26 @@ jobs:
       image: ubuntu:24.04
     steps:
       - uses: actions/checkout@v4
+
       - name: Install deps
         run: |
-          apt-get update && apt-get install -y \
-            clang llvm-dev cmake ninja-build build-essential
+          set -eux
+          apt-get update
+          apt-get install -y \
+            clang-18 llvm-18 llvm-18-dev lld-18 cmake ninja-build build-essential pkg-config \
+            libzstd-dev libcurl4-openssl-dev zlib1g-dev libtinfo-dev libxml2-dev
+          update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 100
+          update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100
+          update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-18 100
+
       - name: Build 01-llvm-kaleidoscope
         run: |
+          set -eux
           cd 01-llvm-kaleidoscope
           mkdir -p build && cd build
-          cmake -G Ninja -DLLVM_DIR=$(llvm-config --cmakedir) ..
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_DIR=$(llvm-config --cmakedir) ..
           ninja
+
+      - name: Run smoke test
+        run: |
+          ./01-llvm-kaleidoscope/build/kaleidoscope --help || true
