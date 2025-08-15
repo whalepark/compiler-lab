@@ -3,4 +3,14 @@
         "*.md": "default",
         "*.markdown": "default"
     }
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnSave": true
+    },
+    "clangd.arguments": [
+        "--fallback-style=none"
+    ],
+    "github.copilot.enable": {
+        "*": false
+    }
 }

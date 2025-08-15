@@ -11,5 +11,5 @@ add_definitions(${LLVM_DEFINITIONS})
 llvm_map_components_to_libnames(LLVM_LIBS
   core orcjit native nativecodegen support)
 
-add_executable(kaleidoscope src/main.cpp)
+add_executable(kaleidoscope src/toy.cpp)
 target_link_libraries(kaleidoscope PRIVATE ${LLVM_LIBS})

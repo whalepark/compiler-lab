@@ -1,0 +1,15 @@
+BasedOnStyle: LLVM
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: false       
+  AfterClass: false           
+  AfterControlStatement: false
+  AfterNamespace: false   
+  BeforeElse: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+NamespaceIndentation: None
+IndentWidth: 2
+ColumnLimit: 100
+PointerAlignment: Left
